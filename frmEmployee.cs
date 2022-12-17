@@ -433,5 +433,15 @@ namespace MerrytelSystem
 			
 			
 		}
-	}
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+			// do somthing
+        }
+    }
 }

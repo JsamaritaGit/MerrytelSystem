@@ -20,7 +20,6 @@ namespace MerrytelSystem
 		private System.Windows.Forms.Button btnMaterials;
 		private System.Windows.Forms.Label lblTime;
 		private System.Windows.Forms.Timer timer1;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.Panel panelExit;
@@ -61,7 +60,6 @@ namespace MerrytelSystem
             this.panel3 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.panelExit = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
@@ -211,7 +209,6 @@ namespace MerrytelSystem
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkSlateGray;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.lblTime);
             this.panel2.Controls.Add(this.panelExit);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -221,19 +218,10 @@ namespace MerrytelSystem
             this.panel2.Size = new System.Drawing.Size(248, 724);
             this.panel2.TabIndex = 5;
             // 
-            // label1
-            // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
-            this.label1.Location = new System.Drawing.Point(5, 622);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(243, 67);
-            this.label1.TabIndex = 17;
-            // 
             // lblTime
             // 
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblTime.Font = new System.Drawing.Font("Bauhaus 93", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTime.ForeColor = System.Drawing.Color.Honeydew;
             this.lblTime.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.lblTime.Location = new System.Drawing.Point(5, 689);
