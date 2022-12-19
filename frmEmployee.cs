@@ -34,8 +34,9 @@ namespace MerrytelSystem
 			int nWidthEllipse, // height of ellipse
 			int nHeightEllipse // width of ellipse
 		);
-		String conString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb";
-		private Form parentForm;
+        OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb");
+
+        private Form parentForm;
 		public frmEmployee()
 		{
 			//
@@ -66,14 +67,13 @@ namespace MerrytelSystem
 			
 			string sql = "SELECT * FROM EmployeeMasterFile WHERE ID = '" + row.Cells[0].Value.ToString() + "'";
 	        
-			OleDbConnection con = new OleDbConnection(conString);
 	        OleDbDataAdapter sda = new OleDbDataAdapter(sql, con);
-	
+			con.Open();
 	        sda.Fill(ds);
-	        
+			con.Close();
 	        txtLastname.Text = Convert.ToString(ds.Tables[0].Rows[0].Field<object>(1));
 	        txtFirstname.Text = Convert.ToString(ds.Tables[0].Rows[0].Field<object>(2));
-	       txtMiddlename.Text = Convert.ToString(ds.Tables[0].Rows[0].Field<object>(3));
+			txtMiddlename.Text = Convert.ToString(ds.Tables[0].Rows[0].Field<object>(3));
 	        txtContact.Text = Convert.ToString(ds.Tables[0].Rows[0].Field<object>(5));
 	        txtAddress.Text = Convert.ToString(ds.Tables[0].Rows[0].Field<object>(6));
 			txtPosition.Text = Convert.ToString(ds.Tables[0].Rows[0].Field<object>(7));
@@ -106,17 +106,16 @@ namespace MerrytelSystem
 		{
 			DataTable dataTableRes = new DataTable();
 			try {
-				
-				OleDbConnection con = new OleDbConnection(conString);
+
 				OleDbDataAdapter dtAdapter = new OleDbDataAdapter(sql, con);
-		        
+		        con.Open();
 				dtAdapter.Fill(dataTableRes);
-		
+				con.Close();
 	        	
 			} catch (OleDbException ex) {
 				MessageBox.Show(ex.Message.ToString(), "ERROR Loading");
 			} finally {
-				// con.Close();
+				con.Close();
 			}
 			return dataTableRes;
 		}
@@ -159,12 +158,9 @@ namespace MerrytelSystem
 				pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 			} catch (Exception ex) {
 				String newline = System.Environment.NewLine;
-				DialogResult dialogResult = MessageBox.Show(ex.Message + newline + newline + "PLEASE UPLOAD A NEW IMAGE..", "IMAGE FILE MISSING", MessageBoxButtons.YesNo);
-				if (dialogResult == DialogResult.Yes) {
-					uploadImage();
-				} else {
-		   			
-				}
+                pictureBox1.Image = Image.FromFile("Image/default.png");
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
 			}
 		    
 		}
@@ -188,47 +184,8 @@ namespace MerrytelSystem
 				}
 			}
 		}
-		void ButtonUpdateClick(object sender, EventArgs e)
-		{
-			DialogResult dialogResult = MessageBox.Show("UPDATE THE FOLLIWING EMPLOYEE?", "UPDATE INFORMATION", MessageBoxButtons.YesNo);
-			if (dialogResult == DialogResult.Yes) {
-				OleDbConnection con = new OleDbConnection(conString);
-				using (OleDbCommand cmd = con.CreateCommand()) {
-					cmd.CommandText = "UPDATE EmployeeMasterFile set Lastname= @Lastname, Firstname = @Firstname, ContactNumber = @ContactNumber, Positions = @Positions, Address = @Address, Middlename = @Middlename, Birthdate = @Birthdate WHERE ID = @ID";
 
-					cmd.Parameters.AddWithValue("@Lastname",txtLastname.Text);
-					cmd.Parameters.AddWithValue("@Firstname", txtFirstname.Text);
-					cmd.Parameters.AddWithValue("@Middlename", txtMiddlename.Text);
-					cmd.Parameters.AddWithValue("@ContactNumber", txtContact.Text);
-					cmd.Parameters.AddWithValue("@Positions", txtPosition.Text);
-					cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
-					cmd.Parameters.AddWithValue("@Birthdate", dateTimePicker1.Value.ToString());
-					cmd.Parameters.AddWithValue("@ID", txtID.Text);
-					cmd.Connection.Open();
-					cmd.ExecuteNonQuery();
-					cmd.Connection.Close();
-					Load_Data();
-				}
-				
-				buttonEdit.Enabled = !buttonEdit.Enabled;
-				buttonEdit.BackColor = Color.Silver;
-				buttonAdd.Enabled = !buttonAdd.Enabled;
-				buttonAdd.BackColor = Color.Silver;
-				buttonDelete.Enabled = !buttonDelete.Enabled;
-				buttonDelete.BackColor = Color.Silver;
-				button1.Enabled = !button1.Enabled;
-				button1.BackColor = Color.Silver;
-				
-				buttonUpdate.Enabled = !buttonUpdate.Enabled;
-				buttonUpdate.BackColor = Color.Transparent;
-				enableLabel();
-				
-			} else if (dialogResult == DialogResult.No) {
-				//do something else
-			}
-			
-		}
-		void ButtonEditClick(object sender, EventArgs e)
+        void ButtonEditClick(object sender, EventArgs e)
 		{
 			buttonEdit.Enabled = !buttonEdit.Enabled;
 			buttonEdit.BackColor = Color.Transparent;
@@ -241,7 +198,7 @@ namespace MerrytelSystem
 			
 			buttonUpdate.Enabled = !buttonUpdate.Enabled;
 			buttonUpdate.BackColor = Color.Silver;
-			enableLabel();
+			
 		}
 		
 		public void enableLabel()
@@ -271,7 +228,6 @@ namespace MerrytelSystem
 				pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 				
 				if (dialogResult == DialogResult.Yes) {
-					OleDbConnection con = new OleDbConnection(conString);
 					using (OleDbCommand cmd = con.CreateCommand()) {
 						cmd.CommandText = "UPDATE EmployeeMasterFile set ImagePath= @ImagePath WHERE ID = @PID";
 	
@@ -285,7 +241,6 @@ namespace MerrytelSystem
 				} else if (dialogResult == DialogResult.No) {
 					//do something else
 				}
-		        
 			} 
 		}
 		void Button1Click(object sender, EventArgs e)
@@ -352,7 +307,6 @@ namespace MerrytelSystem
 				
 			if (dialogResult == DialogResult.Yes) {
 				try {
-					OleDbConnection con = new OleDbConnection(conString);
 					using (OleDbCommand cmd = con.CreateCommand()) {
 						cmd.CommandText = "DELETE FROM EmployeeMasterFile WHERE ID = @PID";
 						cmd.Parameters.AddWithValue("@ID", txtID.Text);
@@ -391,19 +345,18 @@ namespace MerrytelSystem
 		}
 		void ButtonAddClick(object sender, EventArgs e)
 		{
-			if (txtFirstname.Visible == true) {
+			if (txtFirstname.Visible) {
 				DialogResult dialogResult = MessageBox.Show("ADD NEW EMPLOYEE?", "ADD NEW", MessageBoxButtons.YesNo);
 				
 				if (dialogResult == DialogResult.Yes) {
 					try {
-						OleDbConnection con = new OleDbConnection(conString);
 						using (OleDbCommand cmd = con.CreateCommand()) {
 							cmd.CommandText = "INSERT INTO EmployeeMasterFile Lastname = @Lastname, Firstname = @Firstname, Middlename = @Middlename, " +
 							"Birthdate = @Birthdate, ContactNumber = @ContactNumber, Address = @Address, Positions = @Positions";
 							cmd.Parameters.AddWithValue("@Lastname", txtLastname.Text);
 							cmd.Parameters.AddWithValue("@Firstname", txtFirstname.Text);
 							cmd.Parameters.AddWithValue("@Middlename", txtMiddlename.Text);
-							//cmd.Parameters.AddWithValue("@Birthdate", txtBirthdate.Text);
+							cmd.Parameters.AddWithValue("@Birthdate", dateTimePicker1.Value.ToShortDateString());
 							cmd.Parameters.AddWithValue("@ContactNumber", txtContact.Text);
 							cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
 							cmd.Parameters.AddWithValue("@Positions", txtPosition.Text);
@@ -436,12 +389,67 @@ namespace MerrytelSystem
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("UPDATE EMPLOYEE?", "UPDATE", MessageBoxButtons.YesNo);
 
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    using (OleDbCommand cmd = con.CreateCommand())
+                    {
+                        cmd.CommandText = "UPDATE EmployeeMasterFile set Lastname = @Lastname, Firstname = @Firstname, Middlename = @Middlename, " +
+                        "Birthdate = @Birthdate, ContactNumber = @ContactNumber, Address = @Address, Positions = @Positions WHERE ID = @ID";
+						
+						cmd.Parameters.AddWithValue("@Lastname", txtLastname.Text);
+                        cmd.Parameters.AddWithValue("@Firstname", txtFirstname.Text);
+                        cmd.Parameters.AddWithValue("@Middlename", txtMiddlename.Text);
+                        cmd.Parameters.AddWithValue("@Birthdate", dateTimePicker1.Value.ToShortDateString());
+                        cmd.Parameters.AddWithValue("@ContactNumber", txtContact.Text);
+                        cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+                        cmd.Parameters.AddWithValue("@Positions", txtPosition.Text);
+                        cmd.Parameters.AddWithValue("@ID", txtID.Text);
+                        cmd.Connection.Open();
+                        cmd.ExecuteNonQuery();
+                        cmd.Connection.Close();
+                    }
+                    MessageBox.Show("Updated Employee!", "DB Connection With App.Config", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    Load_Data();
+                    clearText();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                buttonEdit.Enabled = !buttonEdit.Enabled;
+                buttonEdit.BackColor = Color.Silver;
+                buttonAdd.Enabled = !buttonAdd.Enabled;
+                buttonAdd.BackColor = Color.Silver;
+                buttonDelete.Enabled = !buttonDelete.Enabled;
+                buttonDelete.BackColor = Color.Silver;
+                button1.Enabled = !button1.Enabled;
+                button1.BackColor = Color.Silver;
+
+                buttonUpdate.Enabled = !buttonUpdate.Enabled;
+                buttonUpdate.BackColor = Color.Transparent;
+            }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
 			// do somthing
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+			Console.WriteLine(dateTimePicker1.Value.ToShortDateString() + "Short Date");
+			Console.WriteLine(dateTimePicker1.Value.ToLongDateString() + "Long date");
+			
         }
     }
 }

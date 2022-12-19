@@ -207,7 +207,7 @@ namespace MerrytelSystem
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel2.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel2.Controls.Add(this.lblTime);
             this.panel2.Controls.Add(this.panelExit);

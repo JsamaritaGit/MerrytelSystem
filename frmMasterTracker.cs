@@ -23,8 +23,8 @@ namespace MerrytelSystem
 	/// </summary>
 	public partial class frmMasterTracker : Form
 	{
-		String conString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb";
-		public frmMasterTracker()
+        OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb");
+        public frmMasterTracker()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -58,11 +58,10 @@ namespace MerrytelSystem
 			try
 			{
 				
-				OleDbConnection con = new OleDbConnection(conString);
 		        OleDbDataAdapter dtAdapter = new OleDbDataAdapter(sql, con);
-		        
+		        con.Open();
 		        dtAdapter.Fill(dataTableRes);
-		
+				con.Close();
 	        	
 			}
 			catch (OleDbException ex)
@@ -71,11 +70,11 @@ namespace MerrytelSystem
             }
 			catch (IndexOutOfRangeException ex)
 			{
-				MessageBox.Show(ex.Message.ToString(), "No Row Return");
+				MessageBox.Show(ex.Message.ToString(), "No Rows Return");
 			}
 			finally
             {
-               // con.Close();
+               con.Close();
             }
 			return dataTableRes;
 		}
@@ -265,7 +264,7 @@ namespace MerrytelSystem
         }
 		public void InsertEmptyData(int SPID)
         {
-			DialogResult dialogResult = MessageBox.Show("No Record Found for this Site Permit, Please Update" ,  "UPDATE PERMIT", MessageBoxButtons.YesNo);
+			DialogResult dialogResult = MessageBox.Show("No Record Found for this Site Permit, Please Update" ,  "Permit Status", MessageBoxButtons.YesNo);
 			if(dialogResult == DialogResult.Yes)
 			{
 				string sqlInsert =  "INSERT INTO SitePermit (SPID, LGU, DPWH, Baranggay, NTP, HOA) VALUES ('" + SPID + "', 'false', 'false', 'false', 'false', 'false')";
@@ -279,7 +278,7 @@ namespace MerrytelSystem
         }
 		public void InsertEmptyData1(int SPID)
         {
-			DialogResult dialogResult = MessageBox.Show("No Record Found for this Site Plan, Please Update" ,  "UPDATE SITE PLAN", MessageBoxButtons.YesNo);
+			DialogResult dialogResult = MessageBox.Show("No Record Found for this Site Plan, Please Update" ,  "Project Plan", MessageBoxButtons.YesNo);
 			if(dialogResult == DialogResult.Yes)
 			{
 				string sqlInsert =  "INSERT INTO SitePlan (SPID, HLD, LLD, AFI, Redline, AsBuilt) VALUES ('" + SPID + "', 'false', 'false', 'false', 'false', 'false')";
@@ -296,7 +295,7 @@ namespace MerrytelSystem
 			DialogResult dialogResult = MessageBox.Show("Update the current Permit?", "Update Permit", MessageBoxButtons.YesNo);
 			if(dialogResult == DialogResult.Yes)
 			{
-				OleDbConnection con = new OleDbConnection(conString);
+				
 				using (OleDbCommand cmd = con.CreateCommand())
                {
 					
@@ -362,8 +361,10 @@ namespace MerrytelSystem
                  cmd.Parameters.AddWithValue("@SPID", txtID.Text);
 
                  cmd.Connection.Open();
+
                  try {
                  	cmd.ExecuteNonQuery();
+						cmd.Connection.Close();
                  } catch (OleDbException ex) {
                  	MessageBox.Show(sql + ", \n\n\"" + ex.Message + "\"", "NOTE! Notify the Dev");
                  	//throw;
@@ -382,7 +383,7 @@ namespace MerrytelSystem
 			DialogResult dialogResult = MessageBox.Show("Update the current Status Plan?", "UPDATE PLAN", MessageBoxButtons.YesNo);
 			if(dialogResult == DialogResult.Yes)
 			{
-				OleDbConnection con = new OleDbConnection(conString);
+
 				using (OleDbCommand cmd = con.CreateCommand())
                {
 					
@@ -433,6 +434,7 @@ namespace MerrytelSystem
                  cmd.Connection.Open();
                  try {
                  	cmd.ExecuteNonQuery();
+					cmd.Connection.Close();
                  } catch (OleDbException ex) {
                  	MessageBox.Show(sql + ", \n\n\"" + ex.Message + "\"", "NOTE! Notify the Dev");
                  	//throw;
@@ -444,5 +446,5 @@ namespace MerrytelSystem
 			    //do something else
 			}		
 		}
-	}
+    }
 }

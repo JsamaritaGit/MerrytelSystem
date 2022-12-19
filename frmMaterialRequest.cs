@@ -35,7 +35,7 @@ namespace MerrytelSystem
 		string selectOSPM = "SELECT * FROM OSPMaterials";
 		string selectMatReq = "SELECT DISTINCT ReferenceNo as [Reference no]FROM MaterialRequest GROUP BY ReferenceNo";
 		string selectItem = "SELECT MaterialRequest.ID as [ID], MaterialRequest.ItemCode as [Item Code], OSPMaterials.ItemVariantDesc as [Item Description], OSPMaterials.UOM, MaterialRequest.Quantity FROM MaterialRequest INNER JOIN OSPMaterials ON MaterialRequest.ItemCode = OSPMaterials.ItemCode";
-	
+		
         OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb");
 
         public frmMaterialRequest()
@@ -72,11 +72,8 @@ namespace MerrytelSystem
 		}	
 		void load_cmb()
 		{
-			//OleDbConnection con = new OleDbConnection(conString);
-	        OleDbDataAdapter dtAdapter = new OleDbDataAdapter(selectOSPM, con);
-	        DataTable dataTableRes = new DataTable();
-	        dtAdapter.Fill(dataTableRes);
-	        cmbItemCode.DataSource = dataTableRes;
+
+	        cmbItemCode.DataSource = dataTableResult(selectOSPM);
 	        cmbItemCode.DisplayMember = "ItemCode";
 	        cmbItemCode.ValueMember = "ItemVariantDesc";
 	        lblDescription.Text = cmbItemCode.SelectedValue.ToString();
@@ -162,26 +159,8 @@ namespace MerrytelSystem
         {
 			DataTable dataTableRes = new DataTable();
 			string sqlInsert =  "INSERT INTO MaterialRequest (ReferenceNO, POno, ItemCode, Transactionno, DateReceive, Quantity, Remarks) VALUES ('" + Referenceno + "', '" + POno + "', '" + ItemCode + "', '" + Transactionno + "', '" + DateReceive + "', '" + quantity + "', '" + remarks+ "')";
- 
-            //using (OleDbConnection cn = new OleDbConnection(conString)) //use your connection string here
-            //{
-                using (OleDbDataAdapter adapter = new OleDbDataAdapter(sqlInsert, con))
-                {
-                    try
-                    {	
-                    	con.Open();
-						adapter.Fill(dataTableRes);
-						dataGridView2.DataSource = dataTableRes;
-						con.Close();
-                    }
-                    catch (OleDbException ex)
-                    {
-                       MessageBox.Show(ex.Message.ToString(), "ERROR Loading");
-                    }
-                    finally{ con.Close(); }
-                }
-
-           // }
+            dataGridView2.DataSource = dataTableResult(sqlInsert);
+            
         }
 		void TextBoxTransactionnoTextChanged(object sender, EventArgs e)
 		{
@@ -220,32 +199,29 @@ namespace MerrytelSystem
         public DataSet dataset(String sql)
 		{
 			
-            DataSet ds = new DataSet();
+            DataSet dataset = new DataSet();
             try
             {
-                //OleDbConnection con = new OleDbConnection(conString);
                 OleDbDataAdapter sda = new OleDbDataAdapter(sql, con);
 				con.Open();
-                sda.Fill(ds);
+                sda.Fill(dataset);
 				con.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-			return ds;
+			return dataset;
         }
         public DataTable dataTableResult(string sql)
         {
-            DataTable dataTableRes = new DataTable();
+            DataTable datatable = new DataTable();
             try
             {
-                //OleDbConnection con = new OleDbConnection(conString);
                 OleDbDataAdapter dtAdapter = new OleDbDataAdapter(sql, con);
                 con.Open();
-                dtAdapter.Fill(dataTableRes);
-                con.Close();
-                
+                dtAdapter.Fill(datatable);
+                con.Close();       
             }
             catch (OleDbException ex)
             {
@@ -255,7 +231,7 @@ namespace MerrytelSystem
             {
                 con.Close();
             }
-            return dataTableRes;
+            return datatable;
         }
         void BtnCloseClick(object sender, EventArgs e)
 		{
@@ -404,20 +380,15 @@ namespace MerrytelSystem
 		{
 	
 		}
-		
-
-
         private void button2_Click(object sender, EventArgs e)
         {
 			//refresh button
 
         }
-
         private void btnAddMaterial_Click(object sender, EventArgs e)
         {
 			//nothing to do here
         }
-
 		private void buttonDelete_Click(object sender, EventArgs e)
 		{
 			DialogResult dialogResult = MessageBox.Show("Are you sure want to DELETE this Item?", "WARNING!!", MessageBoxButtons.YesNo);
@@ -426,8 +397,6 @@ namespace MerrytelSystem
 				runQuery("DELETE from MaterialRequest where ID = " + txtID.Text + "");
                 load_page(selectMatReq, dataGridView1);
                 load_page(selectItem + " WHERE ReferenceNo = '" + textBoxRefno.Text + "' ", dataGridView2);
-
-
             }
 			else if (dialogResult == DialogResult.No)
 			{
@@ -435,5 +404,10 @@ namespace MerrytelSystem
 			
 			}
 		}
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
