@@ -37,7 +37,7 @@ namespace MerrytelSystem
         OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb");
 
         private Form parentForm;
-		public frmEmployee()
+        public frmEmployee()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -445,5 +445,6 @@ namespace MerrytelSystem
         {
 
         }
+
     }
 }

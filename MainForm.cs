@@ -34,21 +34,13 @@ namespace MerrytelSystem
             int nHeightEllipse // width of ellipse
         );
 		private Form activeForm;
-		public MainForm()
+        public Point mouseLocation;
+        public MainForm()
 		{
 			InitializeComponent();
 
-			//this.FormBorderStyle = FormBorderStyle.None;
-            //Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
 			StartTimer();
-//
-//			GraphicsPath p = new GraphicsPath();
-//			p.AddEllipse(1, 1, button1.Width - 4, button1.Height - 4);
-//			btnEmployee.Region = new Region(p);
-//			this.Opacity = .99;
-//			SocketListener sl = new SocketListener();
-			
-			
+				
 		}
 		
 		private void OpenChildForm(Form childForm, object btnSender)
@@ -70,24 +62,13 @@ namespace MerrytelSystem
 		void BtnEmployeeClick(object sender, EventArgs e)
 		{		
 			OpenChildForm(new frmEmployee(), sender);
-			//int left = this.DesktopLocation.X;	
-			//int top = this.DesktopLocation.Y;
-			//frmEmployee fe = new frmEmployee();
-			//fe.Location = new Point(left + 105, top + 50);
-			//fe.Owner = this;
-			//fe.Show();
-			
-			//fe.ShowDialog(this);
+
 			
 		}
 		void BtnProjectSitesClick(object sender, EventArgs e)
 		{
 			OpenChildForm(new frmMasterTracker(), sender);
-//			int left = this.DesktopLocation.X;	
-//			int top = this.DesktopLocation.Y;
-//			frmProjectSite fps = new frmProjectSite();
-//			fps.Location = new Point(left + 105, top + 50);
-//			fps.ShowDialog();
+
 		}
 		void BtnMaterialsClick(object sender, EventArgs e)
 		{
@@ -162,6 +143,70 @@ namespace MerrytelSystem
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void mainForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseLocation.X, mouseLocation.Y);
+                Location = mousePos;
+            }
+
+        }
+        private void mainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseLocation = new Point(-e.X, -e.Y);
         }
     }
 }

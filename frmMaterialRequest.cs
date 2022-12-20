@@ -31,8 +31,9 @@ namespace MerrytelSystem
             int nWidthEllipse, // height of ellipse
             int nHeightEllipse // width of ellipse
         );
-		
-		string selectOSPM = "SELECT * FROM OSPMaterials";
+
+
+        string selectOSPM = "SELECT * FROM OSPMaterials";
 		string selectMatReq = "SELECT DISTINCT ReferenceNo as [Reference no]FROM MaterialRequest GROUP BY ReferenceNo";
 		string selectItem = "SELECT MaterialRequest.ID as [ID], MaterialRequest.ItemCode as [Item Code], OSPMaterials.ItemVariantDesc as [Item Description], OSPMaterials.UOM, MaterialRequest.Quantity FROM MaterialRequest INNER JOIN OSPMaterials ON MaterialRequest.ItemCode = OSPMaterials.ItemCode";
 		
@@ -42,8 +43,6 @@ namespace MerrytelSystem
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
-			
-			
 			InitializeComponent();
 			
 			this.FormBorderStyle = FormBorderStyle.None;
