@@ -96,8 +96,7 @@ namespace MerrytelSystem
 		void ButtonAddClick(object sender, EventArgs e)
 		{
 			formAdd frmAdd = new formAdd(dataGridView1);
-			frmAdd.Owner = this;
-			frmAdd.ShowDialog(this);
+			frmAdd.ShowDialog();	
 		}
 		void TextBoxSearchTextChanged(object sender, EventArgs e)
 		{
@@ -158,58 +157,15 @@ namespace MerrytelSystem
 		}
 		
 		void dataGridView1KeyDown(object sender, KeyEventArgs e)
-		{                
-		    if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
-		    {
-		        var index = e.KeyCode == Keys.Up ? -1 : e.KeyCode == Keys.Down ? 1 : 0;
-		        var rowIndex = dataGridView1.CurrentCell.RowIndex + index;
-		        int rows = dataGridView1.RowCount - 1;
-		        
-		        if (rowIndex > -1 && rowIndex < rows)
-		        {
-		        	
-		            var row = dataGridView1.Rows[rowIndex];
-
-		            if (row != null)
-		            {	
-					            	
-		                txtRegion.Text = row.Cells[3].Value.ToString();
-						txtMunicipality.Text = row.Cells[4].Value.ToString();
-						txtBarangay.Text = row.Cells[5].Value.ToString();
-						txtLCP.Text = row.Cells[6].Value.ToString();
-						txtNAP.Text = row.Cells[7].Value.ToString();
-						txtLines.Text = row.Cells[8].Value.ToString();
-						txtStatus.Text = row.Cells[9].Value.ToString();
-						txtID.Text = row.Cells[0].Value.ToString();
-								
-		            }
-		        }
-		        else
-		        {
-		        	
-		        }
-		    }
-		}
-		void DataGridView1CellClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if(e.RowIndex >=0)
-			{
-				DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-				
-				txtRegion.Text = row.Cells[3].Value.ToString();
-				txtMunicipality.Text = row.Cells[4].Value.ToString();
-				txtBarangay.Text = row.Cells[5].Value.ToString();
-				txtLCP.Text = row.Cells[6].Value.ToString();
-				txtNAP.Text = row.Cells[7].Value.ToString();
-				txtLines.Text = row.Cells[8].Value.ToString();
-				txtStatus.Text = row.Cells[9].Value.ToString();
-				txtID.Text = row.Cells[0].Value.ToString();
-		
-				
-			}
-		}
 
-		private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        }
+        void DataGridView1CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
 		{                
 		    if (e.KeyCode == Keys.Up || e.KeyCode == Keys.Down)
 		    {

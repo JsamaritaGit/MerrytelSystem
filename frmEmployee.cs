@@ -370,10 +370,11 @@ namespace MerrytelSystem
 		
 					} catch (Exception ex) {
 						MessageBox.Show(ex.Message);
-					}
-		            
+					} 
 				}			
-			} else {
+			} 
+			else 
+			{
 				buttonEdit.Enabled = !buttonEdit.Enabled;
 				buttonEdit.BackColor = Color.Transparent;
 				buttonDelete.Enabled = !buttonDelete.Enabled;
@@ -443,13 +444,6 @@ namespace MerrytelSystem
         private void button1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
-			Console.WriteLine(dateTimePicker1.Value.ToShortDateString() + "Short Date");
-			Console.WriteLine(dateTimePicker1.Value.ToLongDateString() + "Long date");
-			
         }
     }
 }

@@ -245,22 +245,35 @@ namespace MerrytelSystem
 		// NOT BEING USED FOR THE TIME BEING====================================================================================================================
 		public void Insert_Data(int SPID, Boolean LGU, string lguapplied, string lgusecured, Boolean DPWH, string dpwhapplied, string dpwhsecured, Boolean Brgy, string brgyapplied, string brgysecured, Boolean NTP, string ntpapplied, string ntpsecured, Boolean HOA, string hoaapplied, string hoasecured)
         {
-			DialogResult dialogResult = MessageBox.Show("UPDATE?" + lguapplied + LGU, "Apply Permit", MessageBoxButtons.YesNo);
-			if(dialogResult == DialogResult.Yes)
-			{
-				string sqlInsert =  "INSERT INTO SitePermit (SPID, LGU, LGUApplied, LGUSecured, DPWH, DPWHApplied, DPWHSecured, Baranggay, BrgyApplied, BrgySecured, NTP, NTPApplied, NTPSecured, HOA, HOAApplied, HOASecured) VALUES ('" + SPID + "', '" + LGU + "', '" + lguapplied + "', '" + lgusecured + "', '" + DPWH + "', '" + dpwhapplied + "', '" + dpwhsecured + "', '" + Brgy + "', '" + brgyapplied + "', '" + brgysecured + "', '" + NTP + "', '" + ntpapplied + "', '" + ntpsecured + "', '" + HOA + "', '" + hoaapplied + "', '" + hoasecured + "')";
-				dataTableResult(sqlInsert);
-				
-				//dataGridView.DataSource = dataTableResult("SELECT SPID, SiteID as [Site ID], SiteName as [Site Name], City.Region, City.Municipality, City.Barangay, LCP, NAP, Lines, Status FROM SiteProject, City WHERE City.CityID = SiteProject.CityID");
-				//dataGridView.Columns[0].Width = 50;
-				//dataGridView.Columns[1].Width = 150;
-				//dataGridView.Columns[2].Width = 300;
-				//this.Dispose();
+            DialogResult dialogResult = MessageBox.Show("ADD NEW SITE?", "NEW", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                try
+                {
+                    using (OleDbCommand cmd = con.CreateCommand())
+                    {
+                        cmd.CommandText = "INSERT INTO EmployeeMasterFile Lastname = @Lastname, Firstname = @Firstname, Middlename = @Middlename, " +
+                        "Birthdate = @Birthdate, ContactNumber = @ContactNumber, Address = @Address, Positions = @Positions";
+                        //cmd.Parameters.AddWithValue("@Lastname", txtLastname.Text);
+                        //cmd.Parameters.AddWithValue("@Firstname", txtFirstname.Text);
+                        //cmd.Parameters.AddWithValue("@Middlename", txtMiddlename.Text);
+                        //cmd.Parameters.AddWithValue("@Birthdate", dateTimePicker1.Value.ToShortDateString());
+                        //cmd.Parameters.AddWithValue("@ContactNumber", txtContact.Text);
+                        //cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+                        //cmd.Parameters.AddWithValue("@Positions", txtPosition.Text);
+                        //cmd.Connection.Open();
+                        //cmd.ExecuteNonQuery();
+                        //cmd.Connection.Close();
+                    }
+                    MessageBox.Show("Added new Site!", "DB Connection With App.Config", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    Load_Data();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-			else if (dialogResult == DialogResult.No)
-			{
-			    //do something else
-			}
         }
 		public void InsertEmptyData(int SPID)
         {
@@ -446,5 +459,16 @@ namespace MerrytelSystem
 			    //do something else
 			}		
 		}
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+			formAdd frmAdd = new formAdd(dataGridView1);
+			frmAdd.ShowDialog();
+        }
     }
 }

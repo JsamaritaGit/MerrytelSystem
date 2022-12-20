@@ -115,7 +115,7 @@ namespace MerrytelSystem
 		public void ChangeColor(){
 			btnEmployee.BackColor = Color.Transparent;
 			btnMaterials.BackColor = Color.Transparent;
-			btnProjectSites.BackColor = Color.Transparent;
+			btnTracker.BackColor = Color.Transparent;
 		}
 		void Button1Click(object sender, EventArgs e)
 		{
@@ -146,16 +146,22 @@ namespace MerrytelSystem
 		}
 		void Button3Click(object sender, EventArgs e)
 		{
-			int left = this.DesktopLocation.X;	
-			int top = this.DesktopLocation.Y;
-			frmPO frmpo = new frmPO();
-			frmpo.Location = new Point(left + 105, top + 50);
-			frmpo.ShowDialog();
+			OpenChildForm(new frmPO(), sender);
 		}
 
 		private void btnMaterials_Click(object sender, EventArgs e)
 		{
 			OpenChildForm(new frmMaterialRequest(), sender);
         }
-	}
+
+        private void btnProjectSite_Click(object sender, EventArgs e)
+        {
+			OpenChildForm(new frmProjectSite(), sender);
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }

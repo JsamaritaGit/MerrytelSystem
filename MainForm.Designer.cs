@@ -14,7 +14,7 @@ namespace MerrytelSystem
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
-		private System.Windows.Forms.Button btnProjectSites;
+		private System.Windows.Forms.Button btnTracker;
 		private System.Windows.Forms.Button btnEmployee;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.Button btnMaterials;
@@ -55,7 +55,7 @@ namespace MerrytelSystem
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnMaterials = new System.Windows.Forms.Button();
-            this.btnProjectSites = new System.Windows.Forms.Button();
+            this.btnTracker = new System.Windows.Forms.Button();
             this.btnEmployee = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -65,9 +65,12 @@ namespace MerrytelSystem
             this.button2 = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.FormPanel = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelExit.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -76,13 +79,13 @@ namespace MerrytelSystem
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.btnMaterials);
-            this.panel1.Controls.Add(this.btnProjectSites);
+            this.panel1.Controls.Add(this.btnTracker);
             this.panel1.Controls.Add(this.btnEmployee);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(93, 724);
+            this.panel1.Size = new System.Drawing.Size(79, 724);
             this.panel1.TabIndex = 1;
             // 
             // button3
@@ -97,14 +100,15 @@ namespace MerrytelSystem
             this.button3.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button3.Location = new System.Drawing.Point(0, 344);
+            this.button3.Location = new System.Drawing.Point(0, 414);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(93, 79);
+            this.button3.Size = new System.Drawing.Size(79, 79);
             this.button3.TabIndex = 22;
             this.button3.Text = "SCO";
             this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.Button3Click);
             // 
             // button1
             // 
@@ -118,10 +122,10 @@ namespace MerrytelSystem
             this.button1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.SystemColors.InactiveCaption;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.Location = new System.Drawing.Point(0, 265);
+            this.button1.Location = new System.Drawing.Point(0, 335);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 79);
+            this.button1.Size = new System.Drawing.Size(79, 79);
             this.button1.TabIndex = 21;
             this.button1.Text = "MR";
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -138,36 +142,36 @@ namespace MerrytelSystem
             this.btnMaterials.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaterials.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMaterials.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.btnMaterials.Location = new System.Drawing.Point(0, 186);
+            this.btnMaterials.Location = new System.Drawing.Point(0, 256);
             this.btnMaterials.Margin = new System.Windows.Forms.Padding(4);
             this.btnMaterials.Name = "btnMaterials";
-            this.btnMaterials.Size = new System.Drawing.Size(93, 79);
+            this.btnMaterials.Size = new System.Drawing.Size(79, 79);
             this.btnMaterials.TabIndex = 20;
             this.btnMaterials.Text = "Materials";
             this.btnMaterials.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnMaterials.UseVisualStyleBackColor = false;
             this.btnMaterials.Click += new System.EventHandler(this.btnMaterials_Click);
             // 
-            // btnProjectSites
+            // btnTracker
             // 
-            this.btnProjectSites.BackColor = System.Drawing.Color.Transparent;
-            this.btnProjectSites.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnProjectSites.BackgroundImage")));
-            this.btnProjectSites.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnProjectSites.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnProjectSites.FlatAppearance.BorderSize = 0;
-            this.btnProjectSites.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
-            this.btnProjectSites.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnProjectSites.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProjectSites.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.btnProjectSites.Location = new System.Drawing.Point(0, 107);
-            this.btnProjectSites.Margin = new System.Windows.Forms.Padding(4);
-            this.btnProjectSites.Name = "btnProjectSites";
-            this.btnProjectSites.Size = new System.Drawing.Size(93, 79);
-            this.btnProjectSites.TabIndex = 18;
-            this.btnProjectSites.Text = "Sites";
-            this.btnProjectSites.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnProjectSites.UseVisualStyleBackColor = false;
-            this.btnProjectSites.Click += new System.EventHandler(this.BtnProjectSitesClick);
+            this.btnTracker.BackColor = System.Drawing.Color.Transparent;
+            this.btnTracker.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTracker.BackgroundImage")));
+            this.btnTracker.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnTracker.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTracker.FlatAppearance.BorderSize = 0;
+            this.btnTracker.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
+            this.btnTracker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTracker.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTracker.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            this.btnTracker.Location = new System.Drawing.Point(0, 177);
+            this.btnTracker.Margin = new System.Windows.Forms.Padding(4);
+            this.btnTracker.Name = "btnTracker";
+            this.btnTracker.Size = new System.Drawing.Size(79, 79);
+            this.btnTracker.TabIndex = 18;
+            this.btnTracker.Text = "Tracker";
+            this.btnTracker.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnTracker.UseVisualStyleBackColor = false;
+            this.btnTracker.Click += new System.EventHandler(this.BtnProjectSitesClick);
             // 
             // btnEmployee
             // 
@@ -180,10 +184,10 @@ namespace MerrytelSystem
             this.btnEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEmployee.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEmployee.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.btnEmployee.Location = new System.Drawing.Point(0, 28);
+            this.btnEmployee.Location = new System.Drawing.Point(0, 98);
             this.btnEmployee.Margin = new System.Windows.Forms.Padding(4);
             this.btnEmployee.Name = "btnEmployee";
-            this.btnEmployee.Size = new System.Drawing.Size(93, 79);
+            this.btnEmployee.Size = new System.Drawing.Size(79, 79);
             this.btnEmployee.TabIndex = 19;
             this.btnEmployee.Text = "Employee";
             this.btnEmployee.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -198,7 +202,7 @@ namespace MerrytelSystem
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(93, 28);
+            this.panel3.Size = new System.Drawing.Size(79, 98);
             this.panel3.TabIndex = 17;
             // 
             // timer1
@@ -209,12 +213,12 @@ namespace MerrytelSystem
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel2.Controls.Add(this.flowLayoutPanel1);
             this.panel2.Controls.Add(this.lblTime);
             this.panel2.Controls.Add(this.panelExit);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(1115, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.panel2.Size = new System.Drawing.Size(248, 724);
             this.panel2.TabIndex = 5;
             // 
@@ -224,9 +228,9 @@ namespace MerrytelSystem
             this.lblTime.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTime.ForeColor = System.Drawing.Color.Honeydew;
             this.lblTime.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.lblTime.Location = new System.Drawing.Point(5, 689);
+            this.lblTime.Location = new System.Drawing.Point(0, 689);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(243, 35);
+            this.lblTime.Size = new System.Drawing.Size(248, 35);
             this.lblTime.TabIndex = 16;
             this.lblTime.Text = "12:34";
             this.lblTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -237,9 +241,9 @@ namespace MerrytelSystem
             this.panelExit.Controls.Add(this.button2);
             this.panelExit.Controls.Add(this.btnClose);
             this.panelExit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelExit.Location = new System.Drawing.Point(5, 0);
+            this.panelExit.Location = new System.Drawing.Point(0, 0);
             this.panelExit.Name = "panelExit";
-            this.panelExit.Size = new System.Drawing.Size(243, 28);
+            this.panelExit.Size = new System.Drawing.Size(248, 28);
             this.panelExit.TabIndex = 15;
             // 
             // button2
@@ -254,7 +258,7 @@ namespace MerrytelSystem
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.SystemColors.Window;
-            this.button2.Location = new System.Drawing.Point(167, 0);
+            this.button2.Location = new System.Drawing.Point(172, 0);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(38, 28);
@@ -275,7 +279,7 @@ namespace MerrytelSystem
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClose.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.Window;
-            this.btnClose.Location = new System.Drawing.Point(205, 0);
+            this.btnClose.Location = new System.Drawing.Point(210, 0);
             this.btnClose.Margin = new System.Windows.Forms.Padding(4);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(38, 28);
@@ -288,11 +292,36 @@ namespace MerrytelSystem
             // 
             this.FormPanel.BackColor = System.Drawing.SystemColors.Window;
             this.FormPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FormPanel.Location = new System.Drawing.Point(93, 0);
+            this.FormPanel.Location = new System.Drawing.Point(79, 0);
             this.FormPanel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 1);
             this.FormPanel.Name = "FormPanel";
-            this.FormPanel.Size = new System.Drawing.Size(1022, 724);
+            this.FormPanel.Size = new System.Drawing.Size(1036, 724);
             this.FormPanel.TabIndex = 6;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 28);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 20, 10, 10);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(248, 661);
+            this.flowLayoutPanel1.TabIndex = 17;
+            // 
+            // label1
+            // 
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.Location = new System.Drawing.Point(13, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(160, 35);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "NCR Target Lines";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // MainForm
             // 
@@ -316,9 +345,12 @@ namespace MerrytelSystem
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panelExit.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
 		private System.Windows.Forms.Panel FormPanel;
-	}
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label label1;
+    }
 }

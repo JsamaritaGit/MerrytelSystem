@@ -34,9 +34,8 @@ namespace MerrytelSystem
         
         private DataGridView dataGridView;
 		string selectCity = "SELECT DISTINCT Municipality FROM City";
-		String conString = "Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb";
-
-		public formAdd(DataGridView dataGridView)
+        OleDbConnection con = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0; Data Source=" + Environment.CurrentDirectory + "/MerrytelDatabase1.mdb");
+        public formAdd(DataGridView dataGridView)
 		{
 			
 			this.dataGridView = dataGridView;
@@ -66,7 +65,7 @@ namespace MerrytelSystem
 		}
 		void load_cmb()
 		{
-			OleDbConnection con = new OleDbConnection(conString);
+
 	        OleDbDataAdapter dtAdapter = new OleDbDataAdapter(selectCity, con);
 	        DataTable dataTableRes = new DataTable();
 	        dtAdapter.Fill(dataTableRes);
@@ -81,11 +80,11 @@ namespace MerrytelSystem
 		
 		public DataTable dataTableResult(string sql)
 		{
-			OleDbConnection con = new OleDbConnection(conString);
 	        OleDbDataAdapter dtAdapter = new OleDbDataAdapter(sql, con);
 	        DataTable dataTableRes = new DataTable();
+			con.Open();
 	        dtAdapter.Fill(dataTableRes);
-		
+			con.Close();
 	        return dataTableRes;
 		}
 		void CmbMunicipalitySelectedIndexChanged(object sender, EventArgs e)
